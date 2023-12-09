@@ -2,7 +2,7 @@
 
 An extremely lightweight plugin (~ 120loc) that hightlights ranges you have entered in commandline.
 
-![Demo for using range-highlight](./demo.gif)
+![Demo for using range-highlight](https://github.com/winston0410/range-highlight.nvim/assets/52210954/6abc9ea1-72fe-4d2a-9797-38c9057ef476)
 
 ## Features
 
