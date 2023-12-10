@@ -149,16 +149,22 @@ end
 
 local function setup(user_opts)
 	opts = vim.tbl_extend("force", opts, user_opts or {})
-	v.nvim_exec(
-		[[ 
-		augroup Ranger
-		autocmd!
-		au CmdlineChanged * lua require('range-highlight').add_highlight()
-		au CmdlineLeave * lua require('range-highlight').cleanup()
-		augroup END
-		]],
-		true
-	)
+
+	local group = vim.api.nvim_create_augroup("range-highlight", { clear = true })
+	vim.api.nvim_create_autocmd({ "CmdlineChanged" }, {
+		group = group,
+		pattern = "*",
+		callback = function()
+			require("range-highlight").add_highlight()
+		end,
+	})
+	vim.api.nvim_create_autocmd({ "CmdlineLeave" }, {
+		group = group,
+		pattern = "*",
+		callback = function()
+			require("range-highlight").cleanup()
+		end,
+	})
 end
 
 return { setup = setup, cleanup = cleanup, add_highlight = add_highlight }
